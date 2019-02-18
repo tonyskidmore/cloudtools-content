@@ -20,5 +20,5 @@
   tasks:
 
     - name: Import test tasks
-      import_tasks: test.yml
+      include_tasks: test.yml
 
