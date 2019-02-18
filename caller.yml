@@ -1,0 +1,19 @@
+---
+- name: Attempt to call another playbook
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: Set target variable
+      set_fact:
+        target: "{{ lookup('env', 'ANSIBLE_TARGET') }}"
+
+    - name: Debug target variable
+      debug:
+        var: target
+
+    - name: Call the required playbook
+      import_playbook: test.yml
+
