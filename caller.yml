@@ -14,6 +14,11 @@
       debug:
         var: target
 
-    - name: Call the required playbook
-      import_playbook: test.yml
+- name: Include tasks to execute
+  hosts: "{{ target }}"
+
+  tasks:
+
+    - name: Import test tasks
+      import_tasks: test.yml
 
