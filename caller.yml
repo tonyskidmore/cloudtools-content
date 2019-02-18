@@ -15,7 +15,7 @@
         var: target
 
 - name: Include tasks to execute
-  hosts: "{{ target }}"
+  hosts: "{{ hostvars['localhost']['target'] }}"
 
   tasks:
 
