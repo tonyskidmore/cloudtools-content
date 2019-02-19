@@ -32,7 +32,7 @@
     az_ssh_private_key: "~/.ssh/cloud_user_id_rsa"
     az_ssh_public_key: "~/.ssh/cloud_user_id_rsa.pub"
     az_vm_tags:
-      build_test: "{{ lookup('env', 'CI_BUILD_ID' }}"
+      build_test: "{{ lookup('env', 'CI_BUILD_ID') }}"
       os: 'linux'
     az_image:
       offer: CentOS
