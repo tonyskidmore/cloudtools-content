@@ -16,11 +16,13 @@
 
 - name: Execute the script
   command: /tmp/master-aoha-os-checker.sh
+  becomes: yes
 
 - name: Find files
   find:
     paths: /var/log/aoha
   register: log_files
+  become: yes
 
 - name: Debug log_files
   debug:
@@ -33,6 +35,7 @@
     flat: yes
   register: fetched
   loop: "{{ log_files.files }}"
+  become: yes
 
 - name: Debug fetched
   debug:
