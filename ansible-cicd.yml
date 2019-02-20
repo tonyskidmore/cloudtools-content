@@ -126,6 +126,10 @@
       debug:
         var: target
 
+  post_tasks:
+ 
+    - name: Refresh inventory to ensure new instace will be picked up
+      meta: refresh_inventory
 
 
 - name: Include tasks to execute
@@ -133,9 +137,6 @@
   gather_facts: no
 
   pre_tasks:
-
-  - name: Refresh inventory to ensure new instace will be picked up
-    meta: refresh_inventory
 
   - name: wait for VMs
     wait_for_connection:
