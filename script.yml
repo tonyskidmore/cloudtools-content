@@ -19,12 +19,22 @@
 
 - name: Find files
   find:
-    paths: /var/logs/aoha
+    paths: /var/log/aoha
   register: log_files
 
 - name: Debug log_files
   debug:
     var: log_files
 
+- name: Fetch the files
+  fetch:
+    src: "{{ item }}"
+    dest: /tmp/fetched
+    flat: yes
+  register: fetched
+  loop: "{{ log_files.file }}"
 
+- name: Debug fetched
+  debug:
+    var: fetched
 
