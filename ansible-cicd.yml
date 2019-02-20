@@ -134,6 +134,9 @@
 
   pre_tasks:
 
+  - name: Refresh inventory to ensure new instace will be picked up
+    meta: refresh_inventory
+
   - name: wait for VMs
     wait_for_connection:
       timeout: 300
