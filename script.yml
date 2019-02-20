@@ -16,7 +16,7 @@
 
 - name: Execute the script
   command: /tmp/master-aoha-os-checker.sh
-  becomes: yes
+  become: yes
 
 - name: Find files
   find:
