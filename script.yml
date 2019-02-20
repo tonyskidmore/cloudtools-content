@@ -32,7 +32,7 @@
     dest: /tmp/fetched
     flat: yes
   register: fetched
-  loop: "{{ log_files.file }}"
+  loop: "{{ log_files.files }}"
 
 - name: Debug fetched
   debug:
