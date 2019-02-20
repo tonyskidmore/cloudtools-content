@@ -148,5 +148,5 @@
   tasks:
 
     - name: Import test tasks
-      include_tasks: test.yml
+      include_tasks: script.yml
 

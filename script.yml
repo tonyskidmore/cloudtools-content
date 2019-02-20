@@ -1,0 +1,30 @@
+---
+
+- name: Get location of the script
+  set_fact:
+    script_path: "{{ lookup('env', 'CI_PROJECT_DIR') }}/master-aoha-os-checker.sh"
+
+- name: Debug script location
+  debug:
+    var: script_path
+
+- name: Copy script to /tmp
+  copy:
+    src: "{{ script_path }}"
+    dest: "/tmp/master-aoha-os-checker.sh"
+    mode: "a+x"
+
+- name: Execute the script
+  command: /tmp/master-aoha-os-checker.sh
+
+- name: Find files
+  find:
+    paths: /var/logs/aoha
+  register: log_files
+
+- name: Debug log_files
+  debug:
+    var: log_files
+
+
+
