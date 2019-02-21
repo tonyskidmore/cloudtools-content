@@ -30,7 +30,7 @@
 
 - name: Fetch the files
   fetch:
-    src: "{{ item }}"
+    src: "{{ item.path }}"
     dest: /tmp/fetched
     flat: yes
   register: fetched
