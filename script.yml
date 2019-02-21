@@ -43,7 +43,7 @@
 - name: Fetch the files
   fetch:
     src: "{{ item.path }}"
-    dest: /tmp/fetched
+    dest: /tmp/fetched/
     flat: yes
   register: fetched
   loop: "{{ log_files.files }}"
