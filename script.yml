@@ -28,6 +28,18 @@
   debug:
     var: log_files
 
+- name: Make the fetch directory
+  file:
+    path: /tmp/fetched
+    state: directory
+  delegate_to: localhost
+  run_once: yes
+  register: fetched_dir
+
+- name: Debug fetched
+  debug:
+    var: fetched_dir
+
 - name: Fetch the files
   fetch:
     src: "{{ item.path }}"
