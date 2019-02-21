@@ -53,3 +53,14 @@
   debug:
     var: fetched
 
+- name: Find files
+  find:
+    paths: /tmp/fetched
+  register: fetched_local
+  delegate_to: localhost
+  run_once: yes
+
+- name: Debug fetched
+  debug:
+    var: fetched_local
+
