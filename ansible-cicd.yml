@@ -22,7 +22,7 @@
         priority: 1001
         direction: Inbound
     az_base_name: 'buildtest1'
-    az_virtualmachine_name: "{{ az_base_name }}"
+    az_virtualmachine_name: "{{ az_base_name }}Vm"
     az_networkinterface_name: "{{ az_base_name }}Nic"
     az_publicipaddress_name: "{{ az_base_name }}Pip"
     az_securitygroup_name: "{{ az_base_name }}Nsg"
@@ -159,6 +159,11 @@
   hosts: localhost
   connection: local
   gather_facts: no
+
+  vars:
+    az_resource_group: Demo-CloudTools-rg
+    az_base_name: 'buildtest1'
+    az_virtualmachine_name: "{{ az_base_name }}Vm"
 
   tasks:
 
