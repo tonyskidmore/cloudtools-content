@@ -17,6 +17,7 @@
 - name: Include tasks to execute
   hosts: "{{ hostvars['localhost']['target'] }}"
 
+
   tasks:
 
     - name: Import test tasks

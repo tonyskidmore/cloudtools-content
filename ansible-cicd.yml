@@ -1,4 +1,5 @@
 ---
+
 - name: Attempt to call another playbook
   hosts: localhost
   connection: local
@@ -136,6 +137,9 @@
   hosts: "{{ hostvars['localhost']['target'] }}"
   gather_facts: no
 
+  vars:
+    verbosity_level: 0
+
   pre_tasks:
 
   - name: wait for VMs
@@ -149,4 +153,21 @@
 
     - name: Import test tasks
       include_tasks: script.yml
+
+
+- name: Clear down Azure resources
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  - name: Delete virtual machine
+    azure_rm_virtualmachine:
+      resource_group: "{{ az_resource_group }}"
+      name: "{{ az_virtualmachine_name }}"
+      state: absent
+      remove_on_absent:
+        - network_interfaces
+        - virtual_storage
+
+
 
