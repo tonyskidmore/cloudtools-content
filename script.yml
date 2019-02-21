@@ -1,8 +1,12 @@
 ---
 
+- name: Get the ci_project_dir
+  set_fact:
+    ci_project_dir: "{{ lookup('env', 'CI_PROJECT_DIR') }}"
+
 - name: Get location of the script
   set_fact:
-    script_path: "{{ lookup('env', 'CI_PROJECT_DIR') }}/master-aoha-os-checker.sh"
+    script_path: "{{ ci_project_dir }}/master-aoha-os-checker.sh"
 
 - name: Debug script location
   debug:
@@ -28,9 +32,13 @@
   debug:
     var: log_files
 
+- name: Set the fetch directory location
+  set_fact:
+    fetch_dir: "{{ ci_project_dir }}/results"
+
 - name: Make the fetch directory
   file:
-    path: /tmp/fetched
+    path: "{{ fetch_dir }}"
     state: directory
   delegate_to: localhost
   run_once: yes
@@ -43,7 +51,7 @@
 - name: Fetch the files
   fetch:
     src: "{{ item.path }}"
-    dest: /tmp/fetched/
+    dest: "{{  fetch_dir }}"
     flat: yes
   register: fetched
   loop: "{{ log_files.files }}"
@@ -55,12 +63,12 @@
 
 - name: Find files
   find:
-    paths: /tmp/fetched
+    paths: "{{ fetch_dir }}"
   register: fetched_local
   delegate_to: localhost
   run_once: yes
 
-- name: Debug fetched
+- name: Debug fetched_local
   debug:
     var: fetched_local
 
