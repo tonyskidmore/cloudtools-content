@@ -160,6 +160,8 @@
   connection: local
   gather_facts: no
 
+  tasks:
+
   - name: Delete virtual machine
     azure_rm_virtualmachine:
       resource_group: "{{ az_resource_group }}"
