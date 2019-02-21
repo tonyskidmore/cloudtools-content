@@ -164,6 +164,8 @@
     az_resource_group: Demo-CloudTools-rg
     az_base_name: 'buildtest1'
     az_virtualmachine_name: "{{ az_base_name }}Vm"
+    az_networkinterface_name: "{{ az_base_name }}Nic"
+    az_network_nsg: "{{ az_networkinterface_name }}"
 
   tasks:
 
@@ -176,5 +178,13 @@
         - network_interfaces
         - virtual_storage
 
+  - name: Debug NSG from creation phase
+    debug:
+      var: hostvars['localhost']['azure_networkinterface']['state']['network_security_group']['name']
 
+  - name: Remove network security group
+    azure_rm_securitygroup:
+      resource_group: "{{ az_resource_group }}"
+      name: "{{ az_network_nsg }}"
+      state: absent
 
