@@ -1,0 +1,27 @@
+---
+
+- name: Ansible for Azure demo
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: Get resource group facts
+    azure_rm_resource_group_facts:
+    register: az_resource_group_facts
+
+  - name: Save facts to temp file
+    copy:
+      dest: /tmp/az_fact.json
+      content: "{{ az_resource_group_facts.azure_resourcegroups | to_json }}"
+
+  - name: Copy file to azure blob
+    azure_rm_storageblob:
+      resource_group: "{{ lookup('env', 'AZURE_RG') }}"
+      storage_account_name: "{{ lookup('env', 'AZURE_STORAGE_ACCOUNT') }}"
+      container: "{{ lookup('env', 'AZURE_STORAGE_CONTAINER') }}"
+      blob: az_fact.json
+      src: /tmp/az_fact.json
+      public_access: container
+      content_type: 'application/json'
