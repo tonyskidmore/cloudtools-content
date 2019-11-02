@@ -8,7 +8,7 @@
   tasks:
 
   - name: Get resource group facts
-    azure_rm_resource_group_facts:
+    azure_rm_resourcegroup_info:
     register: az_resource_group_facts
 
   - name: Save facts to temp file
