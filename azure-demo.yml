@@ -11,6 +11,10 @@
     azure_rm_resourcegroup_info:
     register: az_resource_group_facts
 
+  - name: Debug az_resource_group_facts
+    debug:
+      var: az_resource_group_facts
+
   - name: Save facts to temp file
     copy:
       dest: /tmp/az_fact.json
