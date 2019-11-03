@@ -18,7 +18,7 @@
   - name: Save facts to temp file
     copy:
       dest: /tmp/az_fact.json
-      content: "{{ az_resource_group_facts.azure_resourcegroups | to_json }}"
+      content: "{{ az_resource_group_facts.resourcegroups | to_json }}"
 
   - name: Copy file to azure blob
     azure_rm_storageblob:
